@@ -1,7 +1,7 @@
 pipeline {
    agent any
     stages {
-         stage('pre -build') {
+         stage('pre-build') {
             steps {
                 sh 'echo Pre-build'
                 sh 'python3 --version'
@@ -13,6 +13,38 @@ pipeline {
                 echo 'build in progress'
                 sh 'python3  Webhook/main.py'
             }
+        }
+         stage('build ver2') {
+            steps {
+                sh 'echo build2 in progress'
+            }
+        }
+        stage('deploying') {
+            steps {
+                sh 'echo Deploying build'
+            }
+        }
+        stage('test') {
+            steps {
+                sh 'echo Running test'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Always'
+        }
+        success {
+            echo 'SUCCESS'
+        }
+        failure {
+            echo 'Failure'
+        }
+        unstable {
+            echo 'Unstable'
+        }
+        changed {
+            echo 'Changed'
         }
     }
 }
